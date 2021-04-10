@@ -57,9 +57,10 @@ public class Main : MonoBehaviour
         }
         set
         {
-            if(value > 100)
+            if(value >= 100)
             {
                 value = 100;
+                FightSystem.singleton.animator.SetBool("Rage", true);
             }
             ragebar.transform.localScale = new Vector3(value / 100f, 1, 1);
             _rage = value;
@@ -110,6 +111,7 @@ public class Main : MonoBehaviour
         else
         {
             stage++;
+            DialogSystem.singleton.dialog_sprite.sprite = null;
             DialogSystem.onDialog = false;
             DialogSystem.singleton.fight_related.SetActive(false);
             DialogSystem.singleton.dialog_related.SetActive(false);

@@ -9,8 +9,10 @@ public class DialogSystem : MonoBehaviour
     public GameObject char1, char2;
     public GameObject dialog_related;
     public GameObject game_over;
-    public static string[] dialog_strings = { "Vay be, sonunda ulaştık şu Mars'a.", "Yani, o kadar uğraştık, ama sonunda Mars'a ayak basan ilk ülke biz olacağız.", "Hehehe, haklısın.", "Bu ne yaa??!! Benim gördüğümü sen de görüyor musun?", "...", "Gel şunlara hadlerini bildirelim.", "Adamlar çok güçlü oğlum kaç uzay mekiğine!!",};
+    public static int[] dialog_images = { 1, 1, 2, 3, 3, 3 };
+    public static string[] dialog_strings = { "Vay be, sonunda ulaştık şu Ay'a.", "Yani, o kadar uğraştık, ama sonunda Ay'a hakim olan tek ülke olacağız.", "Hehehe, haklısın.", "Bu ne yaa??!! Benim gördüğümü sen de görüyor musun?", "...", "Gel şunlara hadlerini bildirelim.", "Adamlar çok güçlü oğlum kaç uzay mekiğine!!",};
     public static Dialog[] dialogs;
+    public SpriteRenderer dialog_sprite;
     public class Dialog
     {
         public enum post_state { NEW_DIALOG, START_FIGHT, END_GAME };
@@ -65,6 +67,7 @@ public class DialogSystem : MonoBehaviour
         }
         dialogs[5] = new Dialog(5, Dialog.post_state.START_FIGHT);
         dialogCount = 0;
+        MusicSystem.setStage(MusicSystem.Stage.FIRST_DIALOGS);
     }
 
     void Update()
@@ -77,6 +80,7 @@ public class DialogSystem : MonoBehaviour
 
     public static void setDialog(int id)
     {
+        DialogSystem.singleton.dialog_sprite.sprite = Resources.Load<Sprite>("Sprites/dialogs/" + dialog_images[id + 1].ToString());
         singleton.char1.SetActive(false);
         singleton.char2.SetActive(false);
         DialogSystem.singleton.fight_related.SetActive(false);

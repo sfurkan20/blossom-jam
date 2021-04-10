@@ -68,6 +68,7 @@
     <Compile Include="Assets\Ragefalse.cs" />
     <Compile Include="Assets\Scripts\BackgroundProp.cs" />
     <Compile Include="Assets\AIAttack1End.cs" />
+    <Compile Include="Assets\Scripts\MusicSystem.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

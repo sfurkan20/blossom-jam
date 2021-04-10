@@ -9,6 +9,7 @@ public class Ragefalse : StateMachineBehaviour
     {
         Main.singleton.rage = 0;
         animator.SetBool("Attack3", false);
+        animator.SetBool("Rage", false);
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks

@@ -9,6 +9,7 @@ public class FightSystem : MonoBehaviour
     public Animator animator;
     static int _attacking = 0;
     public Image c1pp, c2pp;
+    public SpriteRenderer moonlander;
     public static int attacking
     {
         get
@@ -74,6 +75,8 @@ public class FightSystem : MonoBehaviour
         //DialogSystem.singleton.char1.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>
         DialogSystem.singleton.char1.transform.GetChild(0).GetComponent<AttackSystem>().currentAttack = AttackSystem.AttackType.NONE;
         Animator a = DialogSystem.singleton.char1.GetComponent<Animator>();
+        Animator a2 = DialogSystem.singleton.char2.GetComponent<Animator>();
+        a2.runtimeAnimatorController = Resources.Load<RuntimeAnimatorController>("Controllers/" + Main.stage.ToString());
         a.SetBool("Attack1", false);
         a.SetBool("Attack2", false);
         a.SetBool("Attack3", false);
@@ -87,6 +90,8 @@ public class FightSystem : MonoBehaviour
     }
     public static void startFight(int id)
     {
+        MusicSystem.setStage((MusicSystem.Stage)(id + 1));
+        singleton.moonlander.sprite = Resources.Load<Sprite>("Sprites/vehicles/" + id.ToString());
         singleton.c1pp.sprite = Resources.Load<Sprite>("Sprites/pp/0");
         singleton.c2pp.sprite = Resources.Load<Sprite>("Sprites/pp/" + id.ToString());
         DialogSystem.singleton.char1.SetActive(true);

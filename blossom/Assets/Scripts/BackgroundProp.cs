@@ -60,10 +60,10 @@ public class BackgroundProp : MonoBehaviour
     
     IEnumerator Destry()
     {
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(3);
         GameObject newgo = new GameObject();
         int no = Random.Range(1, 10);
-        newgo.transform.position = new Vector3(1000, 1000, 0.53f);
+        newgo.transform.position = new Vector3(1000, 1000, Random.Range(-0.02f, 0.02f));
         newgo.AddComponent<SpriteRenderer>();
         newgo.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Sprites/bg/" + no.ToString());
         newgo.AddComponent<BackgroundProp>();
