@@ -64,6 +64,9 @@
     <Compile Include="Assets\Scripts\AttackSystem.cs" />
     <Compile Include="Assets\Scripts\Main.cs" />
     <Compile Include="Assets\FistFalse.cs" />
+    <Compile Include="Assets\StunFalse.cs" />
+    <Compile Include="Assets\Ragefalse.cs" />
+    <Compile Include="Assets\Scripts\BackgroundProp.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

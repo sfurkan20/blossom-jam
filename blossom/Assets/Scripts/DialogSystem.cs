@@ -5,11 +5,15 @@ using UnityEngine.UI;
 
 public class DialogSystem : MonoBehaviour
 {
-    public static string[] dialog_strings = { "Vay be, sonunda ulaştık şu Mars'a.", "Yani, o kadar uğraştık, ama sonunda Mars'a ayak basan ilk ülke biz olacağız.", "Hehehe, haklısın.", "Bu ne yaa??!! Benim gördüğümü sen de görüyor musun?", "...", "Gel şunlara hadlerini bildirelim."};
+    public GameObject fight_related;
+    public GameObject char1, char2;
+    public GameObject dialog_related;
+    public GameObject game_over;
+    public static string[] dialog_strings = { "Vay be, sonunda ulaştık şu Mars'a.", "Yani, o kadar uğraştık, ama sonunda Mars'a ayak basan ilk ülke biz olacağız.", "Hehehe, haklısın.", "Bu ne yaa??!! Benim gördüğümü sen de görüyor musun?", "...", "Gel şunlara hadlerini bildirelim.", "Adamlar çok güçlü oğlum kaç uzay mekiğine!!",};
     public static Dialog[] dialogs;
     public class Dialog
     {
-        public enum post_state { NEW_DIALOG, START_FIGHT };
+        public enum post_state { NEW_DIALOG, START_FIGHT, END_GAME };
         post_state poststate;
         public int id;
         public string dialog;
@@ -26,7 +30,11 @@ public class DialogSystem : MonoBehaviour
             }
             else if(poststate == post_state.START_FIGHT)
             {
-                setter = new state_setter(FightSystem.startFight);
+                setter = new state_setter(Main.singleton.NextStage);
+            }
+            else if(poststate == post_state.END_GAME)
+            {
+                DialogSystem.singleton.game_over.SetActive(true);
             }
         }
     }
@@ -69,6 +77,10 @@ public class DialogSystem : MonoBehaviour
 
     public static void setDialog(int id)
     {
+        singleton.char1.SetActive(false);
+        singleton.char2.SetActive(false);
+        DialogSystem.singleton.fight_related.SetActive(false);
+        DialogSystem.singleton.dialog_related.SetActive(true);
         dialogCount++;
     }
 }

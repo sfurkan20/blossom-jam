@@ -5,6 +5,7 @@ using UnityEngine;
 public class WalkSystem : MonoBehaviour
 {
     public static bool canWalk = true;
+    public static bool canWalkW = true;
     public static bool walking = false;
     public static Vector2 screenCoord;
     Animator animator;
@@ -46,7 +47,7 @@ public class WalkSystem : MonoBehaviour
                     walking = true;
                 }
             }
-            if (Input.GetKey(KeyCode.W))
+            if (Input.GetKey(KeyCode.W) && canWalkW)
             {
                 if (transform.position.y > 8.55f)
                 {
@@ -73,6 +74,22 @@ public class WalkSystem : MonoBehaviour
                 }
             }
             animator.SetBool("Walk", walking);
+        }
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.CompareTag("Obstacle"))
+        {
+            canWalkW = false;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Obstacle"))
+        {
+            canWalkW = true;
         }
     }
 }
