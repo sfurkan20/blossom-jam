@@ -7,6 +7,7 @@ public class Ragefalse : StateMachineBehaviour
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        Main.singleton.rage = 0;
         animator.SetBool("Attack3", false);
     }
 

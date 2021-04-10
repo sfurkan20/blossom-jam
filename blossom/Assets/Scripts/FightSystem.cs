@@ -61,7 +61,6 @@ public class FightSystem : MonoBehaviour
         }
         else if(Input.GetKeyDown(KeyCode.R) && Main.singleton.rage >= 100)
         {
-            Main.singleton.rage = 0;
             last_press_delta = 0;
             last_press_threshold = 1.2f;
             attacking = 3;
@@ -70,6 +69,19 @@ public class FightSystem : MonoBehaviour
 
     public void startFght(GameObject g)
     {
+        attacking = 0;
+        // ADD IDLE ANIMATION
+        //DialogSystem.singleton.char1.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>
+        DialogSystem.singleton.char1.transform.GetChild(0).GetComponent<AttackSystem>().currentAttack = AttackSystem.AttackType.NONE;
+        Animator a = DialogSystem.singleton.char1.GetComponent<Animator>();
+        a.SetBool("Attack1", false);
+        a.SetBool("Attack2", false);
+        a.SetBool("Attack3", false);
+        a.SetBool("Stun", false);
+        a.SetBool("Walk", false);
+        Main.singleton.hp1 = 100;
+        Main.singleton.hp2 = 100;
+        Main.singleton.rage = 0;
         startFight(Main.stage);
         g.SetActive(false);
     }
@@ -79,16 +91,12 @@ public class FightSystem : MonoBehaviour
         singleton.c2pp.sprite = Resources.Load<Sprite>("Sprites/pp/" + id.ToString());
         DialogSystem.singleton.char1.SetActive(true);
         DialogSystem.singleton.char2.SetActive(true);
-        GameObject c1 = Instantiate(DialogSystem.singleton.char1, null, true);
+        /*GameObject c1 = Instantiate(DialogSystem.singleton.char1, null, true);
         GameObject c2 = Instantiate(DialogSystem.singleton.char2, null, true);
         c1.name = "char1";
         c2.name = "char2";
         c1.SetActive(false);
-        c2.SetActive(false);
-        Main.singleton.hp2 = 100;
-        Main.singleton.rage = 0;
-        DialogSystem.singleton.char1 = c1;
-        DialogSystem.singleton.char2 = c2;
+        c2.SetActive(false);*/
         DialogSystem.onDialog = false;
         DialogSystem.singleton.fight_related.SetActive(true);
         DialogSystem.singleton.dialog_related.SetActive(false);

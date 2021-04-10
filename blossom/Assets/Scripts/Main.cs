@@ -23,8 +23,8 @@ public class Main : MonoBehaviour
             if(value <= 0)
             {
                 ending.SetActive(true);
-                Destroy(char1);
-                Destroy(char2);
+                char1.SetActive(false);
+                char2.SetActive(false);
             }
             _hp1 = value;
         }
@@ -41,8 +41,8 @@ public class Main : MonoBehaviour
             if(value <= 0)
             {
                 NextStage(0);
-                Destroy(char1);
-                Destroy(char2);
+                char1.SetActive(false);
+                char2.SetActive(false);
             }
             hp2img.transform.localScale = new Vector3(value / 100f, 1, 1);
             _hp2 = value;
@@ -100,12 +100,18 @@ public class Main : MonoBehaviour
     {
         if(stage == 3)
         {
-            GameOver();
+            DialogSystem.singleton.dialog_related.SetActive(true);
+            DialogSystem.singleton.dialogText.text = "Herifleri nasıl kovduk ama?\n[Tebrikler, kazandınız! Ana menüye dönmek için tıklayın.]";
+            DialogSystem.singleton.dialogText.transform.parent.GetComponent<Button>().onClick.AddListener(()=>
+            {
+                GameOver();
+            });
         }
         else
         {
             stage++;
             DialogSystem.onDialog = false;
+            DialogSystem.singleton.fight_related.SetActive(false);
             DialogSystem.singleton.dialog_related.SetActive(false);
             fightstart.transform.GetChild(1).GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprites/pp/" + stage.ToString());
             fightstart.SetActive(true);

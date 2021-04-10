@@ -51,7 +51,7 @@ public class AttackSystem : MonoBehaviour
                 {
                     print(info.normalizedTime % info.length < 0.02f);
                 }
-                if (info.normalizedTime % info.length < 0.02f)
+                if (info.normalizedTime % info.length < 0.05f)
                 {
                     TakeDamage(currentAttack);
                 }
@@ -75,8 +75,8 @@ public class AttackSystem : MonoBehaviour
         switch (type)
         {
             case AttackType.ATTACK_SLAP:
-                deltahp = Random.Range(-1f, -0.5f);
-                deltarage = Random.Range(3f, 6f);
+                deltahp = Random.Range(-0.7f, -0.4f);
+                deltarage = Random.Range(1.7f, 3.7f);
                 Main.singleton.setHP(transform.parent.name, deltahp);
                 if(stun_prob <= 5)
                 {
@@ -108,11 +108,18 @@ public class AttackSystem : MonoBehaviour
     {
         if(transform.parent.name == "char1")
         {
-            GameObject.Find("char2").GetComponent<Animator>().SetBool("Stun", true);
+            GameObject g = GameObject.Find("char2");
+            if (g != null) {
+                g.GetComponent<Animator>().SetBool("Stun", true);
+            }
         }
         if (transform.parent.name == "char2")
         {
-            GameObject.Find("char1").GetComponent<Animator>().SetBool("Stun", true);
+            GameObject g = GameObject.Find("char1");
+            if (g != null)
+            {
+                g.GetComponent<Animator>().SetBool("Stun", true);
+            }
         }
     }
 }
