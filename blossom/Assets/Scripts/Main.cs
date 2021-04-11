@@ -24,6 +24,7 @@ public class Main : MonoBehaviour
             if(value <= 0)
             {
                 value = 0;
+                WalkSystem.canWalk = false;
                 StartCoroutine(KO(char1));
             }
             _hp1 = value;
@@ -59,6 +60,10 @@ public class Main : MonoBehaviour
             if(value >= 100)
             {
                 value = 100;
+                if (!FightSystem.singleton.animator.GetBool("Rage"))
+                {
+                    SoundSystem.setSound(SoundSystem.Sound.FIRE);
+                }
                 FightSystem.singleton.animator.SetBool("Rage", true);
             }
             ragebar.transform.localScale = new Vector3(value / 100f, 1, 1);
@@ -114,10 +119,12 @@ public class Main : MonoBehaviour
             DialogSystem.onDialog = true;
             Camera.main.transform.position = new Vector3(1.22f, 0.32f, -10);
             DialogSystem.dialogCount++;
+            DialogSystem.singleton.dialog_sprite.enabled = true;
             DialogSystem.singleton.dialog_sprite.sprite = Resources.Load<Sprite>("Sprites/dialogs/4");
             DialogSystem.singleton.fight_related.SetActive(false);
             Vector3 pos = DialogSystem.singleton.dialogText.transform.parent.GetComponent<RectTransform>().anchoredPosition;
             pos.y = 293;
+            MusicSystem.setStage(MusicSystem.Stage.VICTORY);
             DialogSystem.singleton.dialogText.transform.parent.GetComponent<RectTransform>().anchoredPosition = pos;
             DialogSystem.singleton.dialogText.text = "Herifleri nasıl kovduk ama?\n[Tebrikler, kazandınız! Ana menüye dönmek için tıklayın.]";
             DialogSystem.singleton.dialogText.transform.parent.GetComponent<Button>().onClick.RemoveAllListeners();
@@ -129,6 +136,7 @@ public class Main : MonoBehaviour
         else
         {
             stage++;
+            MusicSystem.setStage((MusicSystem.Stage)(stage + 1));
             DialogSystem.singleton.dialog_sprite.sprite = null;
             DialogSystem.onDialog = false;
             DialogSystem.singleton.fight_related.SetActive(false);

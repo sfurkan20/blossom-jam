@@ -70,6 +70,7 @@
     <Compile Include="Assets\Scripts\CameraSystem.cs" />
     <Compile Include="Assets\Ragefalse.cs" />
     <Compile Include="Assets\FallEnd.cs" />
+    <Compile Include="Assets\Scripts\SoundSystem.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

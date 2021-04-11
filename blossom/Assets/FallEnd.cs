@@ -28,8 +28,10 @@ public class FallEnd : StateMachineBehaviour
             DialogSystem.dialogCount++;
             Vector3 pos = DialogSystem.singleton.dialogText.transform.parent.GetComponent<RectTransform>().anchoredPosition;
             pos.y = 293;
+            MusicSystem.setStage(MusicSystem.Stage.DEFEAT);
             DialogSystem.singleton.fight_related.SetActive(false);
             DialogSystem.singleton.dialogText.transform.parent.GetComponent<RectTransform>().anchoredPosition = pos;
+            DialogSystem.singleton.dialog_sprite.enabled = true;
             DialogSystem.singleton.dialog_sprite.sprite = Resources.Load<Sprite>("Sprites/dialogs/5");
             DialogSystem.singleton.dialogText.text = "Çok güçlüler oğlum uzay mekiğine kaçç!!??\n[Kaybettiniz, ama üzülmeyin. Ana menüye dönmek için tıklayabilirsiniz.]";
             DialogSystem.singleton.dialogText.transform.parent.GetComponent<Button>().onClick.RemoveAllListeners();

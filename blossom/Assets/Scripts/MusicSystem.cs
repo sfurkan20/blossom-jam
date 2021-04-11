@@ -37,7 +37,14 @@ public class MusicSystem : MonoBehaviour
     public static void setStage(Stage s)
     {
         source.clip = singleton.clips[(int)s];
-        source.Play();
+        if (s == Stage.VICTORY || s == Stage.DEFEAT)
+        {
+            source.PlayOneShot(source.clip);
+        }
+        else
+        {
+            source.Play();
+        }
     }
 
     public void SetScene(int id)

@@ -91,7 +91,7 @@ public class FightSystem : MonoBehaviour
     }
     public static void startFight(int id)
     {
-        MusicSystem.setStage((MusicSystem.Stage)(id + 1));
+        DialogSystem.singleton.dialog_sprite.enabled = false;
         singleton.moonlander.sprite = Resources.Load<Sprite>("Sprites/vehicles/" + id.ToString());
         singleton.c1pp.sprite = Resources.Load<Sprite>("Sprites/pp/0");
         singleton.c2pp.sprite = Resources.Load<Sprite>("Sprites/pp/" + id.ToString());

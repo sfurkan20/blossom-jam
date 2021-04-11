@@ -47,10 +47,6 @@ public class AttackSystem : MonoBehaviour
             }
             if (_continue)
             {
-                if (transform.parent.name == "char1")
-                {
-                    print(info.normalizedTime % info.length < 0.02f);
-                }
                 if (info.normalizedTime % info.length < 0.05f)
                 {
                     TakeDamage(currentAttack);
@@ -76,18 +72,20 @@ public class AttackSystem : MonoBehaviour
         {
             case AttackType.ATTACK_SLAP:
                 deltahp = Random.Range(-0.7f, -0.4f);
-                deltarage = Random.Range(1.7f, 3.7f);
+                deltarage = Random.Range(0.6f, 0.8f);
                 Main.singleton.setHP(transform.parent.name, deltahp);
-                if(stun_prob <= 5)
+                //SoundSystem.setSound(SoundSystem.Sound.SLAP);
+                if (stun_prob <= 5)
                 {
                     Stun();
                 }
                 break;
             case AttackType.ATTACK_FIST:
                 deltahp = Random.Range(-7f, -4f);
-                deltarage = Random.Range(10f, 20f);
+                deltarage = Random.Range(5f, 12f);
                 Main.singleton.setHP(transform.parent.name, deltahp);
-                if(stun_prob <= 30)
+                SoundSystem.setSound(SoundSystem.Sound.PUNCH);
+                if (stun_prob <= 30)
                 {
                     Stun();
                 }
@@ -95,6 +93,7 @@ public class AttackSystem : MonoBehaviour
             case AttackType.ATTACK_RAGE:
                 deltahp = Random.Range(-15f, -9f);
                 Main.singleton.setHP(transform.parent.name, deltahp);
+                SoundSystem.setSound(SoundSystem.Sound.FIREBALL);
                 Stun();
                 break;
         }

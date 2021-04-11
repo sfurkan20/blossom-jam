@@ -18,59 +18,51 @@ public class WalkSystem : MonoBehaviour
         if (canWalk)
         {
             walking = false;
-            if (Input.GetKey(KeyCode.D))
+            if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
             {
-                if (transform.position.x > 15.4f)
-                {
-                    walking = false;
-                    transform.position = new Vector3(15.4f, transform.position.y, transform.position.z);
-                }
-                else
-                {
-                    transform.Translate(Time.deltaTime * 3.5f, 0, 0);
-                    transform.eulerAngles = new Vector3(0, 0, 0);
-                    walking = true;
-                }
+
+                transform.Translate(Time.deltaTime * 3.5f, 0, 0);
+                transform.eulerAngles = new Vector3(0, 0, 0);
+                walking = true;
             }
-            if (Input.GetKey(KeyCode.A))
+            if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
             {
-                if (transform.position.x < -14.92f)
-                {
-                    walking = false;
-                    transform.position = new Vector3(-14.92f, transform.position.y, transform.position.z);
-                }
-                else
-                {
-                    transform.Translate(Time.deltaTime * 3.5f, 0, 0);
-                    transform.eulerAngles = new Vector3(0, 180, 0);
-                    walking = true;
-                }
+
+                transform.Translate(Time.deltaTime * 3.5f, 0, 0);
+                transform.eulerAngles = new Vector3(0, 180, 0);
+                walking = true;
             }
-            if (Input.GetKey(KeyCode.W) && canWalkW)
+            if ((Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow)) && canWalkW)
             {
-                if (transform.position.y > 8.55f)
-                {
-                    walking = false;
-                    transform.position = new Vector3(transform.position.x, 8.55f, transform.position.z);
-                }
-                else
-                {
-                    transform.Translate(0, Time.deltaTime * 3.5f, 0);
-                    walking = true;
-                }
+
+                transform.Translate(0, Time.deltaTime * 3.5f, 0);
+                walking = true;
             }
-            if (Input.GetKey(KeyCode.S))
+            if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
             {
-                if (transform.position.y < -6.15f)
-                {
-                    walking = false;
-                    transform.position = new Vector3(transform.position.x, -6.15f, transform.position.z);
-                }
-                else
-                {
-                    transform.Translate(0, -Time.deltaTime * 3.5f, 0);
-                    walking = true;
-                }
+
+                transform.Translate(0, -Time.deltaTime * 3.5f, 0);
+                walking = true;
+            }
+            if (transform.position.x > 15.4f)
+            {
+                walking = false;
+                transform.position = new Vector3(15.4f, transform.position.y, transform.position.z);
+            }
+            if (transform.position.x < -14.92f)
+            {
+                walking = false;
+                transform.position = new Vector3(-14.92f, transform.position.y, transform.position.z);
+            }
+            if (transform.position.y > 8.55f)
+            {
+                walking = false;
+                transform.position = new Vector3(transform.position.x, 8.55f, transform.position.z);
+            }
+            if (transform.position.y < -6.15f)
+            {
+                walking = false;
+                transform.position = new Vector3(transform.position.x, -6.15f, transform.position.z);
             }
             animator.SetBool("Walk", walking);
         }
