@@ -10,6 +10,7 @@ public class DialogSystem : MonoBehaviour
     public GameObject dialog_related;
     public GameObject game_over;
     public static int[] dialog_images = { 1, 1, 2, 3, 3, 3 };
+    public static int[] dialog_speakimages = { 1, 2, 1, 2, 1, 2 };
     public static string[] dialog_strings = { "Vay be, sonunda ulaştık şu Ay'a.", "Yani, o kadar uğraştık, ama sonunda Ay'a hakim olan tek ülke olacağız.", "Hehehe, haklısın.", "Bu ne yaa??!! Benim gördüğümü sen de görüyor musun?", "...", "Gel şunlara hadlerini bildirelim.", "Adamlar çok güçlü oğlum kaç uzay mekiğine!!",};
     public static Dialog[] dialogs;
     public SpriteRenderer dialog_sprite;
@@ -74,12 +75,16 @@ public class DialogSystem : MonoBehaviour
     {
         if(onDialog && Input.GetMouseButtonDown(0))
         {
-            dialogs[dialogCount].setter(dialogCount);
+            if (dialogCount <= 5)
+            {
+                dialogs[dialogCount].setter(dialogCount);
+            }
         }
     }
 
     public static void setDialog(int id)
     {
+        singleton.dialogText.transform.parent.GetChild(1).GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprites/dialogpps/" + dialog_speakimages[id + 1].ToString());
         DialogSystem.singleton.dialog_sprite.sprite = Resources.Load<Sprite>("Sprites/dialogs/" + dialog_images[id + 1].ToString());
         singleton.char1.SetActive(false);
         singleton.char2.SetActive(false);

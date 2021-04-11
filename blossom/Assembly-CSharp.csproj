@@ -55,20 +55,21 @@
     <Analyzer Include="C:\Program Files (x86)\Microsoft Visual Studio Tools for Unity\16.0\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\AttackSystem.cs" />
+    <Compile Include="Assets\FistFalse.cs" />
+    <Compile Include="Assets\Scripts\MusicSystem.cs" />
+    <Compile Include="Assets\Scripts\Main.cs" />
+    <Compile Include="Assets\Scripts\AISystem.cs" />
+    <Compile Include="Assets\AIAttack1End.cs" />
     <Compile Include="Assets\Scripts\FightSystem.cs" />
+    <Compile Include="Assets\Scripts\BackgroundProp.cs" />
     <Compile Include="Assets\Scripts\DialogSystem.cs" />
     <Compile Include="Assets\Scripts\WalkSystem.cs" />
-    <Compile Include="Assets\Scripts\AISystem.cs" />
-    <Compile Include="Assets\Scripts\CameraSystem.cs" />
     <Compile Include="Assets\AttackEnd.cs" />
-    <Compile Include="Assets\Scripts\AttackSystem.cs" />
-    <Compile Include="Assets\Scripts\Main.cs" />
-    <Compile Include="Assets\FistFalse.cs" />
     <Compile Include="Assets\StunFalse.cs" />
+    <Compile Include="Assets\Scripts\CameraSystem.cs" />
     <Compile Include="Assets\Ragefalse.cs" />
-    <Compile Include="Assets\Scripts\BackgroundProp.cs" />
-    <Compile Include="Assets\AIAttack1End.cs" />
-    <Compile Include="Assets\Scripts\MusicSystem.cs" />
+    <Compile Include="Assets\FallEnd.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

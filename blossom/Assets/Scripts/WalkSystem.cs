@@ -7,7 +7,6 @@ public class WalkSystem : MonoBehaviour
     public static bool canWalk = true;
     public static bool canWalkW = true;
     public static bool walking = false;
-    public static Vector2 screenCoord;
     Animator animator;
     void Start()
     {

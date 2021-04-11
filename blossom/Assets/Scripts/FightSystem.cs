@@ -39,6 +39,7 @@ public class FightSystem : MonoBehaviour
     void Start()
     {
         singleton = this;
+        attacking = 0;
     }
 
     void Update()
@@ -96,6 +97,8 @@ public class FightSystem : MonoBehaviour
         singleton.c2pp.sprite = Resources.Load<Sprite>("Sprites/pp/" + id.ToString());
         DialogSystem.singleton.char1.SetActive(true);
         DialogSystem.singleton.char2.SetActive(true);
+        DialogSystem.singleton.char1.transform.position = new Vector3(-6f, -2.58f, 1);
+        DialogSystem.singleton.char2.transform.position = new Vector3(6f, -2.58f, 1.1f);
         /*GameObject c1 = Instantiate(DialogSystem.singleton.char1, null, true);
         GameObject c2 = Instantiate(DialogSystem.singleton.char2, null, true);
         c1.name = "char1";

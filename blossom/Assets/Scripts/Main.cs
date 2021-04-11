@@ -8,8 +8,9 @@ public class Main : MonoBehaviour
     public static int stage = 0;
     public static Main singleton;
     public Image hp1img, hp2img, ragebar;
+    public AnimationClip koclip;
     public GameObject char1, char2;
-    public GameObject ending, fightstart;
+    public GameObject ending, fightstart, ko;
     float _hp1;
     public float hp1
     {
@@ -22,9 +23,8 @@ public class Main : MonoBehaviour
             hp1img.transform.localScale = new Vector3(value / 100f, 1, 1);
             if(value <= 0)
             {
-                ending.SetActive(true);
-                char1.SetActive(false);
-                char2.SetActive(false);
+                value = 0;
+                StartCoroutine(KO(char1));
             }
             _hp1 = value;
         }
@@ -40,9 +40,8 @@ public class Main : MonoBehaviour
         {
             if(value <= 0)
             {
-                NextStage(0);
-                char1.SetActive(false);
-                char2.SetActive(false);
+                value = 0;
+                StartCoroutine(KO(char2));
             }
             hp2img.transform.localScale = new Vector3(value / 100f, 1, 1);
             _hp2 = value;
@@ -79,6 +78,15 @@ public class Main : MonoBehaviour
         DialogSystem.currentDialog = new DialogSystem.Dialog(6, DialogSystem.Dialog.post_state.NEW_DIALOG);
     }
 
+    IEnumerator KO(GameObject character)
+    {
+        ko.SetActive(true);
+        Animation a = ko.GetComponent<Animation>();
+        character.GetComponent<Animator>().SetBool("Fall", true);
+        yield return new WaitForSeconds(1.6f);
+        character.GetComponent<Animator>().SetBool("Fall", false);
+    }
+
     public void setHP(string name, float decrease)
     {
         switch (name)
@@ -94,6 +102,7 @@ public class Main : MonoBehaviour
 
     public void GameOver()
     {
+        Destroy(GameObject.Find("MusicSystem"));
         UnityEngine.SceneManagement.SceneManager.LoadScene(0);
     }
 
@@ -102,7 +111,16 @@ public class Main : MonoBehaviour
         if(stage == 3)
         {
             DialogSystem.singleton.dialog_related.SetActive(true);
+            DialogSystem.onDialog = true;
+            Camera.main.transform.position = new Vector3(1.22f, 0.32f, -10);
+            DialogSystem.dialogCount++;
+            DialogSystem.singleton.dialog_sprite.sprite = Resources.Load<Sprite>("Sprites/dialogs/4");
+            DialogSystem.singleton.fight_related.SetActive(false);
+            Vector3 pos = DialogSystem.singleton.dialogText.transform.parent.GetComponent<RectTransform>().anchoredPosition;
+            pos.y = 293;
+            DialogSystem.singleton.dialogText.transform.parent.GetComponent<RectTransform>().anchoredPosition = pos;
             DialogSystem.singleton.dialogText.text = "Herifleri nasıl kovduk ama?\n[Tebrikler, kazandınız! Ana menüye dönmek için tıklayın.]";
+            DialogSystem.singleton.dialogText.transform.parent.GetComponent<Button>().onClick.RemoveAllListeners();
             DialogSystem.singleton.dialogText.transform.parent.GetComponent<Button>().onClick.AddListener(()=>
             {
                 GameOver();

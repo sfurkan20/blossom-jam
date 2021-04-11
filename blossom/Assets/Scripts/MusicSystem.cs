@@ -11,6 +11,19 @@ public class MusicSystem : MonoBehaviour
     void Start()
     {
         DontDestroyOnLoad(gameObject);
+        if(UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex == 0)
+        {
+            //DialogSystem.dialogCount = 0;
+            DialogSystem.onDialog = true;
+            //DialogSystem.singleton = null;
+            //FightSystem.singleton = null;
+            //FightSystem.attacking = 0;
+            Main.singleton = null;
+            Main.stage = 0;
+            WalkSystem.canWalk = true;
+            WalkSystem.canWalkW = true;
+            WalkSystem.walking = false;
+        }
         singleton = this;
         source = GetComponent<AudioSource>();
         setStage(Stage.MAIN_MENU);
