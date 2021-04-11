@@ -20,13 +20,13 @@ public class Main : MonoBehaviour
         }
         set
         {
-            hp1img.transform.localScale = new Vector3(value / 100f, 1, 1);
             if(value <= 0)
             {
                 value = 0;
                 WalkSystem.canWalk = false;
                 StartCoroutine(KO(char1));
             }
+            hp1img.fillAmount = value / 100f;
             _hp1 = value;
         }
     }
@@ -44,7 +44,7 @@ public class Main : MonoBehaviour
                 value = 0;
                 StartCoroutine(KO(char2));
             }
-            hp2img.transform.localScale = new Vector3(value / 100f, 1, 1);
+            hp2img.fillAmount = value / 100f;
             _hp2 = value;
         }
     }
@@ -66,7 +66,7 @@ public class Main : MonoBehaviour
                 }
                 FightSystem.singleton.animator.SetBool("Rage", true);
             }
-            ragebar.transform.localScale = new Vector3(value / 100f, 1, 1);
+            ragebar.fillAmount = value / 100f;
             _rage = value;
         }
     }
